@@ -84,6 +84,7 @@ _CONVERTER = markdown.Markdown(
         "pymdownx.superfences",
         "pymdownx.tilde",
         "sane_lists",
+        "md2conf.obsidian",
     ],
     extension_configs={
         "footnotes": {"BACKLINK_TITLE": ""},
