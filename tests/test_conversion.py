@@ -22,7 +22,7 @@ from md2conf.extra import override
 from md2conf.latex import LATEX_ENABLED
 from md2conf.matcher import Matcher, MatcherOptions
 from md2conf.mermaid import has_mmdc
-from md2conf.metadata import ConfluenceSiteMetadata
+from md2conf.metadata import ConfluencePageMetadata, ConfluenceSiteMetadata
 from tests import emoji
 from tests.utility import TypedTestCase
 
@@ -82,6 +82,16 @@ class TestConversion(TypedTestCase):
         self.target_dir = test_dir / "target"
         self.site_metadata = ConfluenceSiteMetadata(domain="example.com", base_path="/wiki/", space_key="SPACE_KEY")
         self.page_metadata = ConfluencePageCollection()
+        basic_path = (self.source_dir / "basic.md").resolve()
+        self.page_metadata.add(
+            basic_path,
+            ConfluencePageMetadata(
+                page_id="00000000000",
+                space_key="SPACE_KEY",
+                title="Basic features",
+                synchronized=True,
+            ),
+        )
 
     def test_markdown(self) -> None:
         emoji.generate_source(self.source_dir / "emoji.md")

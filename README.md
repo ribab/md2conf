@@ -361,6 +361,12 @@ Displaying math formulas in Confluence requires the extension [LaTeX Math for Co
 | `![My label][STATUS-GREEN]`                | green status label                                      |
 | `<input type="date" value="YYYY-MM-DD" />` | date widget (with year, month and day set as specified) |
 
+*md2conf* also understands the Obsidian `[[wiki link]]` syntax. Wiki links are
+resolved just like regular Markdown links. Placeholders such as `[[_TOC_]]` and
+`[[_LISTING_]]` continue to render Confluence widgets and are not interpreted as
+links. Obsidian transclusions using `![[...]]` are currently not supported.
+
+
 Use the pseudo-language `csf` in a Markdown code block to pass content directly to Confluence. The content must be a single XML node that conforms to Confluence Storage Format (typically an `ac:structured-macro`) but is otherwise not validated. The following example shows how to create a panel similar to an *info panel* but with custom background color and emoji. Notice that `ac:rich-text-body` uses XHTML, not Markdown.
 
 ````markdown
@@ -504,15 +510,17 @@ positional arguments:
 options:
   -h, --help            show this help message and exit
   --version             show program's version number and exit
-  -d, --domain DOMAIN   Confluence organization domain.
-  -p, --path PATH       Base path for Confluence (default: '/wiki/').
+  -d DOMAIN, --domain DOMAIN
+                        Confluence organization domain.
+  -p PATH, --path PATH  Base path for Confluence (default: '/wiki/').
   --api-url API_URL     Confluence API URL. Required for scoped tokens. Refer to documentation how to obtain one.
-  -u, --username USERNAME
+  -u USERNAME, --username USERNAME
                         Confluence user name.
-  -a, --api-key API_KEY
+  -a API_KEY, --api-key API_KEY
                         Confluence API key. Refer to documentation how to obtain one.
-  -s, --space SPACE     Confluence space key for pages to be published. If omitted, will default to user space.
-  -l, --loglevel {debug,info,warning,error,critical}
+  -s SPACE, --space SPACE
+                        Confluence space key for pages to be published. If omitted, will default to user space.
+  -l {debug,info,warning,error,critical}, --loglevel {debug,info,warning,error,critical}
                         Use this option to set the log verbosity.
   -r ROOT_PAGE          Root Confluence page to create new pages. If omitted, will raise exception when creating new pages.
   --keep-hierarchy      Maintain source directory structure when exporting to Confluence.
